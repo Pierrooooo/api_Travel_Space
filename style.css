@@ -1,0 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Droid+Sans:400,700);
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 16px;
+    font-family: "Droid Sans", arial, verdana, sans-serif;
+}
+body{
+    min-height: 100%;
+    width: 100%;
+    background-image: url('imgs/oui.jpg');
+    background-repeat: no-repeat;
+    background-position: center 0%;
+    background-size: cover;
+    color: #ff6;
+}
+
+h1{
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    text-align: center;
+    color: #ff6;
+    font-weight: 700;
+}
+
+div{
+    gap: 200px;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+div button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: transparent;
+    color: #ff6;
+    border: 2px solid #ff6;
+    border-radius: 2px;
+    padding: 1rem;
+    width: fit-content;
+    text-transform: uppercase;
+}
