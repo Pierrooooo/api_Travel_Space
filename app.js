@@ -87,10 +87,19 @@ function getStarWarsCharacters(){
 
         response.results.forEach(people => {
             peoplesDiv.innerHTML += `
-            <div class="people" data-name="${people.name}">
+            <div class="people" data-name="${people.name}" data-image="Sorry but the API I used for StarWars stuffs do not have images ;(">
                 <p>${people.name}</p>
             </div>
             `
+        })
+        document.querySelectorAll('.people').forEach(people => {
+            people.addEventListener('click', event => {
+                console.log(people)
+                document.querySelector('.your_copilot').innerHTML += `
+                <p>${people.dataset.name}</p>
+                <p>${people.dataset.image}</p>
+                `
+            })
         })
         
     })
@@ -113,7 +122,15 @@ function getGOTCharacters(){
             </div>
             `
         })
-        
+        document.querySelectorAll('.people').forEach(characters => {
+            characters.addEventListener('click', event => {
+                console.log(characters)
+                document.querySelector('.your_copilot').innerHTML += `
+                <p>${characters.dataset.name}</p>
+                <img src="${characters.dataset.image}"></img>
+                `
+            })
+        })
     })
 }
 function getRMCharacters(){
@@ -133,6 +150,15 @@ function getRMCharacters(){
                 <p>${characters.name}, ${characters.species}</p>
             </div>
             `
+        })
+        document.querySelectorAll('.people').forEach(characters => {
+            characters.addEventListener('click', event => {
+                console.log(characters)
+                document.querySelector('.your_copilot').innerHTML += `
+                <p>${characters.dataset.name}</p>
+                <img src="${characters.dataset.image}"></img>
+                `
+            })
         })
         
     })
@@ -155,6 +181,15 @@ function getHPCharacters(){
                 <p>${characters.name}, ${characters.species}</p>
             </div>
             `
+        })
+        document.querySelectorAll('.people').forEach(characters => {
+            characters.addEventListener('click', event => {
+                console.log(characters)
+                document.querySelector('.your_copilot').innerHTML += `
+                <p>${characters.dataset.name}</p>
+                <img src="${characters.dataset.image}"></img>
+                `
+            })
         })
         
     })
