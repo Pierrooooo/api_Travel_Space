@@ -44,7 +44,7 @@ function getPlanets(){
             <div class="planet" data-name="${planet.name}">
                 <p>Name : ${planet.name}</p>
                 <p>Climate : ${planet.climate} - ${planet.terrain}</p>
-                <p>Water Index : ${planet.surface_water}</p>
+                <p>Water (in %) : ${planet.surface_water}</p>
                 <p>Gravity Index : ${planet.gravity}</p>
             </div>
             `
@@ -117,7 +117,6 @@ function getStarShips(){
 function getStarWarsCharacters(countPass){
     document.querySelector('.all_char').innerHTML=``
     passMax = document.querySelector('.choose_universe').dataset.passmax
-    console.log(passMax)
 
     fetch('https://swapi.dev/api/people')
     .then(response => response.json())
@@ -143,7 +142,7 @@ function getStarWarsCharacters(countPass){
         document.querySelectorAll('.people').forEach(people => {
             people.addEventListener('click', event => {
                 countPass += 1
-                if(countPass<passMax){
+                if(countPass<=passMax){
                     document.querySelector('.your_copilot').innerHTML += `
                     <p>${people.dataset.name}</p>
                     <p>${people.dataset.image}</p>
@@ -189,7 +188,7 @@ function getGOTCharacters(countPass){
         document.querySelectorAll('.people').forEach(characters => {
             characters.addEventListener('click', event => {
                 countPass += 1
-                if(countPass<passMax){
+                if(countPass<=passMax){
                     document.querySelector('.your_copilot').innerHTML += `
                 <img src="${characters.dataset.image}"></img>
                 <p>${characters.dataset.name} <br> ${characters.dataset.family}</p>
@@ -205,6 +204,9 @@ function getGOTCharacters(countPass){
     })
 }
 function getRMCharacters(countPass){
+    document.querySelector('.all_char').innerHTML=``
+    passMax = document.querySelector('.choose_universe').dataset.passmax
+    
     document.querySelector('.all_char').innerHTML=``
     
     fetch('https://rickandmortyapi.com/api/character')
@@ -231,10 +233,18 @@ function getRMCharacters(countPass){
         }
         document.querySelectorAll('.people').forEach(characters => {
             characters.addEventListener('click', event => {
-                document.querySelector('.your_copilot').innerHTML += `
+                countPass += 1
+                if(countPass<=passMax){
+                    document.querySelector('.your_copilot').innerHTML += `
                 <img src="${characters.dataset.image}"></img>
                 <p>${characters.dataset.name} <br> ${characters.dataset.species}</p>
                 `
+                }
+                else{
+                    document.querySelector('.your_copilot').innerHTML += `
+                    <p>You can't add more passengers because of your starship capacity</p>
+                    `
+                }
             })
         })
         
@@ -242,6 +252,9 @@ function getRMCharacters(countPass){
 }
 
 function getHPCharacters(countPass){
+    document.querySelector('.all_char').innerHTML=``
+    passMax = document.querySelector('.choose_universe').dataset.passmax
+
     document.querySelector('.all_char').innerHTML=``
     
     fetch('https://hp-api.herokuapp.com/api/characters')
@@ -268,21 +281,22 @@ function getHPCharacters(countPass){
         }
         document.querySelectorAll('.people').forEach(characters => {
             characters.addEventListener('click', event => {
-                document.querySelector('.your_copilot').innerHTML += `
+                countPass += 1
+                if(countPass<=passMax){
+                    document.querySelector('.your_copilot').innerHTML += `
                 <img src="${characters.dataset.image}"></img>
                 <p>${characters.dataset.name} <br>${characters.dataset.house}</p>
                 `
+                }
+                else{
+                    document.querySelector('.your_copilot').innerHTML += `
+                    <p>You can't add more passengers because of your starship capacity</p>
+                    `
+                }
             })
         })
-        
     })
 }
-
-// the witcher films disney 
-//https://hp-api.herokuapp.com/api/characters
-// https://api.disneyapi.dev/characters
-//https://rickandmortyapi.com/api/location
-
 
 
 function disappear(){

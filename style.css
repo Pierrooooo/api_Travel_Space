@@ -22,9 +22,9 @@ body{
     background-position: center 0%; */
     color: #ff6;
 }
-/* body::-webkit-scrollbar {
+*::-webkit-scrollbar {
     display: none;
-} */
+}
 .hi_welcome, h1{
     font-size: 4rem;
     color: #ff6;
@@ -333,5 +333,32 @@ section{
     to {
     opacity: 1;
     transform: translate3d(26px, 0, 0) rotate(0deg);
+    }
+}
+
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~RESPONSIVE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+@media screen and (max-width: 600px)
+{
+    .hi_welcome, h1{
+        font-size: 2rem;
+        line-height: 5rem;
+    }
+    .scroll{
+        right: 10%;
+    }
+    .click{
+        left: 10%;
+    }
+    .your_section{
+        width: 60%;
+    }
+    .your_section2{
+        transform: translateX(-70%);
+        transition: 200ms;
+    }
+    .your_copilot p{
+        text-align: left;
     }
 }
