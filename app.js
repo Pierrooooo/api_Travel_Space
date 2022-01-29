@@ -20,6 +20,7 @@ function restart(){
         document.querySelector('.your_section').classList.toggle('your_section2')
     })
     getPlanets()
+
 }
 
 document.querySelector('.arrow').addEventListener('click',  event =>{
@@ -34,7 +35,7 @@ function getPlanets(){
     .then(response => response.json())
     .then(response => {
 
-        document.querySelector('.container').innerHTML += `<h2 class="h2_choose">Choose Your Destination</h2>`
+        document.querySelector('.container').innerHTML += `<h2 class="h2_choose choose_destination">Choose Your Destination</h2>`
         document.querySelector('.container').innerHTML += `<section id="planets_div" class="planets_div"></section>`
         let planetsDiv = document.querySelector('.planets_div')
         planetsDiv.innerHTML += ``
@@ -63,12 +64,15 @@ function getPlanets(){
                 <h2 class="h2_your">Destination :</h2>
                 <p>${planet.dataset.name}</p>
                 `
+                
+                document.querySelector('.planets_div').remove()
+                document.querySelector('.choose_destination').remove()
+
                 getStarShips()
             })
         })
         
     })
-    
 }
 
 function getStarShips(){
@@ -77,8 +81,8 @@ function getStarShips(){
     .then(response => response.json())
     .then(response => {
 
-        document.querySelector('.container').innerHTML += `<h2 class="h2_choose">Choose Your Starship</h2>`
-        document.querySelector('.container').innerHTML += `<section class="starships_div"></section>`
+        document.querySelector('.container').innerHTML += `<h2 class="h2_choose choose_starships">Choose Your Starship</h2>`
+        document.querySelector('.container').innerHTML += `<section id="starships_div" class="starships_div"></section>`
         let starShipsDiv = document.querySelector('.starships_div')
 
         response.results.forEach(ship => {
@@ -99,7 +103,7 @@ function getStarShips(){
                 `
                 const passMax = ship.dataset.pas
 
-                document.querySelector('.container').innerHTML += `<h2 class="h2_choose">Choose The Universe of your Co-Pilot/Passengers</h2>`
+                document.querySelector('.container').innerHTML += `<h2 class="h2_choose ">Choose The Universe of your Co-Pilot/Passengers</h2>`
                 document.querySelector('.container').innerHTML +=`
                 <section class="choose_universe" data-passmax="${passMax}">
                     <button onclick="getStarWarsCharacters(countPass)">Star Wars</button>
@@ -109,6 +113,9 @@ function getStarShips(){
                 </section>
                 <div class="all_char"></div>
                 `
+                
+                document.querySelector('.starships_div').remove()
+                document.querySelector('.choose_starships').remove()
             })
         })
     })
@@ -121,7 +128,7 @@ function getStarWarsCharacters(countPass){
     fetch('https://swapi.dev/api/people')
     .then(response => response.json())
     .then(response => {
-        document.querySelector('.all_char').innerHTML += `<section class="characters_div"></section>`
+        document.querySelector('.all_char').innerHTML += `<section id="characters_div" class="characters_div"></section>`
         let peoplesDiv = document.querySelector('.characters_div')
 
         response.results.forEach(people => {
@@ -158,6 +165,7 @@ function getStarWarsCharacters(countPass){
         
         
     })
+
 }
 function getGOTCharacters(countPass){
     document.querySelector('.all_char').innerHTML=``
@@ -202,6 +210,7 @@ function getGOTCharacters(countPass){
             })
         })
     })
+
 }
 function getRMCharacters(countPass){
     document.querySelector('.all_char').innerHTML=``
@@ -249,6 +258,7 @@ function getRMCharacters(countPass){
         })
         
     })
+
 }
 
 function getHPCharacters(countPass){
@@ -296,6 +306,7 @@ function getHPCharacters(countPass){
             })
         })
     })
+
 }
 
 
