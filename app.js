@@ -1,5 +1,3 @@
-
-
 const countPass = 0
 
 var yourDes = document.querySelector('.your_destination')
@@ -8,10 +6,27 @@ var yourCoP = document.querySelector('.your_copilot')
 
 function restart(){
     document.querySelector('.container').innerHTML=``
-    document.querySelector('.your_relative').innerHTML=``
+    document.querySelector('.your_section').innerHTML=``
+    document.querySelector('.your_section').innerHTML=`
+    <div class="your_relative"></div>`
 
+    document.querySelector('.your_section').classList.toggle('your_section2')
+    document.querySelector('.arrow').remove()
+    document.querySelector('.your_section').parentElement.innerHTML+=`
+    <img class="arrow" src="imgs/arrow.png" alt="arrow's icon">
+    `
+    document.querySelector('.arrow').addEventListener('click',  event =>{
+        document.querySelector('.arrow').classList.toggle('arrow2')
+        document.querySelector('.your_section').classList.toggle('your_section2')
+    })
     getPlanets()
 }
+
+document.querySelector('.arrow').addEventListener('click',  event =>{
+    document.querySelector('.arrow').classList.toggle('arrow2')
+    document.querySelector('.your_section').classList.toggle('your_section2')
+})
+
 
 function getPlanets(){
     
@@ -37,6 +52,12 @@ function getPlanets(){
 
         document.querySelectorAll('.planet').forEach(planet => {
             planet.addEventListener('click', event => {
+                document.querySelector('.your_relative').innerHTML+=`
+                <div class="your_destination"></div>
+                <div class="your_starship"></div>
+                <div class="your_copilot"></div>
+                `
+
                 document.querySelector('.your_destination').innerHTML += `
                 <button onclick="restart()" class="restart_button">RESTART</button>
                 <h2 class="h2_your">Destination :</h2>

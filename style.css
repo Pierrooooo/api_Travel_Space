@@ -68,7 +68,7 @@ button{
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.go button:hover{
+button:hover{
     cursor: pointer;
 }
 
@@ -101,10 +101,18 @@ section{
     top: 0;
     background-color: rgba(10, 10, 10, 0.5);
     backdrop-filter: blur(10px);
-    width: 25%;
+    width: 30%;
     height: 100vh;
     margin-bottom: 0;
     z-index: 1000;
+    overflow-y: scroll;
+    overflow-x: auto;
+    transform: translateX(90%);
+    transition: 200ms;
+}
+.your_section2{
+    transform: translateX(0);
+    transition: 200ms;
 }
 .your_relative{
     position: relative;
@@ -116,10 +124,27 @@ section{
     padding: 5px;
     gap: 20px;
     padding-top: 40px;
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: auto;
 }
-
+.arrow{
+    position: fixed;
+    top: 50%;
+    right: 0;
+    transform: translate(-50%, -50%) rotateY(180deg);
+    width: 50px;
+    z-index: 1000;
+    transition: 400ms;
+}
+.arrow2{
+    right: 27%;
+    transform: translate(-50%, -50%) rotateY(0);
+}
+.dn{
+    display: none;
+}
+.arrow:hover{
+    cursor: pointer;
+}
 .your_copilot, 
 .your_destination, 
 .your_starship{
