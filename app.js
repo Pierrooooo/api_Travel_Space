@@ -1,6 +1,17 @@
+
+
+const countPass = 0
+
 var yourDes = document.querySelector('.your_destination')
 var yourShip = document.querySelector('.your_starship')
 var yourCoP = document.querySelector('.your_copilot')
+
+function restart(){
+    document.querySelector('.container').innerHTML=``
+    document.querySelector('.your_relative').innerHTML=``
+
+    getPlanets()
+}
 
 function getPlanets(){
     
@@ -8,23 +19,27 @@ function getPlanets(){
     .then(response => response.json())
     .then(response => {
 
-        document.querySelector('body').innerHTML += `<section id="planets_div" class="planets_div"></section>`
+        document.querySelector('.container').innerHTML += `<h2 class="h2_choose">Choose Your Destination</h2>`
+        document.querySelector('.container').innerHTML += `<section id="planets_div" class="planets_div"></section>`
         let planetsDiv = document.querySelector('.planets_div')
-        
+        planetsDiv.innerHTML += ``
+
         response.results.forEach(planet => {
             planetsDiv.innerHTML += `
             <div class="planet" data-name="${planet.name}">
-                <p>${planet.name}</p>
-                <p>${planet.climate} - ${planet.terrain}</p>
-                <p>Gravity Index : ${planet.surface_water}</p>
+                <p>Name : ${planet.name}</p>
+                <p>Climate : ${planet.climate} - ${planet.terrain}</p>
+                <p>Water Index : ${planet.surface_water}</p>
+                <p>Gravity Index : ${planet.gravity}</p>
             </div>
             `
         })
 
         document.querySelectorAll('.planet').forEach(planet => {
             planet.addEventListener('click', event => {
-                console.log(planet)
                 document.querySelector('.your_destination').innerHTML += `
+                <button onclick="restart()" class="restart_button">RESTART</button>
+                <h2 class="h2_your">Destination :</h2>
                 <p>${planet.dataset.name}</p>
                 `
                 getStarShips()
@@ -41,13 +56,14 @@ function getStarShips(){
     .then(response => response.json())
     .then(response => {
 
-        document.querySelector('body').innerHTML += `<section class="starships_div"></section>`
+        document.querySelector('.container').innerHTML += `<h2 class="h2_choose">Choose Your Starship</h2>`
+        document.querySelector('.container').innerHTML += `<section class="starships_div"></section>`
         let starShipsDiv = document.querySelector('.starships_div')
 
         response.results.forEach(ship => {
             starShipsDiv.innerHTML += `
-            <div class="ship" data-name="${ship.name}">
-                <p>${ship.name}</p>
+            <div class="ship" data-name="${ship.name}" data-pas="${ship.passengers}">
+                <p>${ship.name} <br>Passengers max : ${ship.passengers}</p>
             </div>
             `
         })
@@ -56,34 +72,37 @@ function getStarShips(){
             ship.addEventListener('click', el => {  
 
                 document.querySelector('.your_starship').innerHTML += `
+                <h2 class="h2_your">Starship :</h2>
                 <p>${ship.dataset.name}</p>
+                <p>Passengers max : ${ship.dataset.pas}</p>
                 `
+                const passMax = ship.dataset.pas
 
-                document.querySelector('body').innerHTML +=`
-                <section class="choose_universe">
-                    <h2>Choose an Universe</2>
-                    <button onclick="getStarWarsCharacters()">Star Wars</button>
-                    <button onclick="getGOTCharacters()">Game Of Thrones</button>
-                    <button onclick="getRMCharacters()">Rick & Morty</button>
-                    <button onclick="getHPCharacters()">Harry Potter</button>
+                document.querySelector('.container').innerHTML += `<h2 class="h2_choose">Choose The Universe of your Co-Pilot/Passengers</h2>`
+                document.querySelector('.container').innerHTML +=`
+                <section class="choose_universe" data-passmax="${passMax}">
+                    <button onclick="getStarWarsCharacters(countPass)">Star Wars</button>
+                    <button onclick="getGOTCharacters(countPass)">Game Of Thrones</button>
+                    <button onclick="getRMCharacters(countPass)">Rick & Morty</button>
+                    <button onclick="getHPCharacters(countPass)">Harry Potter</button>
                 </section>
                 <div class="all_char"></div>
                 `
-            
             })
         })
     })
 }
 
-function getStarWarsCharacters(){
+function getStarWarsCharacters(countPass){
     document.querySelector('.all_char').innerHTML=``
+    passMax = document.querySelector('.choose_universe').dataset.passmax
+    console.log(passMax)
 
     fetch('https://swapi.dev/api/people')
     .then(response => response.json())
     .then(response => {
-        document.querySelector('.all_char').innerHTML += `<section class="characters_starwars_div"></section>`
-        let peoplesDiv = document.querySelector('.characters_starwars_div')
-        console.log(peoplesDiv)
+        document.querySelector('.all_char').innerHTML += `<section class="characters_div"></section>`
+        let peoplesDiv = document.querySelector('.characters_div')
 
         response.results.forEach(people => {
             peoplesDiv.innerHTML += `
@@ -92,71 +111,108 @@ function getStarWarsCharacters(){
             </div>
             `
         })
+        if((typeof document.querySelector('.h2_your_co'))!= 'undefined'){
+            document.querySelector('.your_copilot').innerHTML += `
+                <h2 class="h2_your_co">Co-Pilot/Passengers from StarWars: </h2>
+                `
+        }
+        else{
+            document.querySelector('.your_copilot').innerHTML += ``
+        }
         document.querySelectorAll('.people').forEach(people => {
             people.addEventListener('click', event => {
-                console.log(people)
-                document.querySelector('.your_copilot').innerHTML += `
-                <p>${people.dataset.name}</p>
-                <p>${people.dataset.image}</p>
-                `
+                countPass += 1
+                if(countPass<passMax){
+                    document.querySelector('.your_copilot').innerHTML += `
+                    <p>${people.dataset.name}</p>
+                    <p>${people.dataset.image}</p>
+                    `
+                }
+                else{
+                    document.querySelector('.your_copilot').innerHTML += `
+                    <p>You can't add more passengers because of your starship capacity</p>
+                    `
+                }
             })
         })
         
+        
     })
 }
-function getGOTCharacters(){
+function getGOTCharacters(countPass){
     document.querySelector('.all_char').innerHTML=``
+    passMax = document.querySelector('.choose_universe').dataset.passmax
     
     fetch('https://thronesapi.com/api/v2/Characters')
     .then(response => response.json())
     .then(response => {
-        document.querySelector('.all_char').innerHTML += `<section class="characters_got_div"></section>`
-        let charactersDiv = document.querySelector('.characters_got_div')
-        console.log(charactersDiv)
+        document.querySelector('.all_char').innerHTML += `<section class="characters_div"></section>`
+        let charactersDiv = document.querySelector('.characters_div')
 
         response.forEach(characters => {
             charactersDiv.innerHTML += `
-            <div class="people" data-name="${characters.fullName}" data-image="${characters.imageUrl}">
+            <div class="people" data-name="${characters.fullName}" data-family="${characters.family}" data-image="${characters.imageUrl}">
                 <img src="${characters.imageUrl}"></img>
-                <p>${characters.fullName}, ${characters.family}</p>
+                <p>${characters.fullName} <br> ${characters.family}</p>
             </div>
             `
         })
+        if((typeof document.querySelector('.h2_your_co'))!= 'undefined'){
+            document.querySelector('.your_copilot').innerHTML += `
+                <h2 class="h2_your_co">Co-Pilot/Passengers from Game Of Thrones: </h2>
+                `
+        }
+        else{
+            document.querySelector('.your_copilot').innerHTML += ``
+        }
         document.querySelectorAll('.people').forEach(characters => {
             characters.addEventListener('click', event => {
-                console.log(characters)
-                document.querySelector('.your_copilot').innerHTML += `
-                <p>${characters.dataset.name}</p>
+                countPass += 1
+                if(countPass<passMax){
+                    document.querySelector('.your_copilot').innerHTML += `
                 <img src="${characters.dataset.image}"></img>
+                <p>${characters.dataset.name} <br> ${characters.dataset.family}</p>
                 `
+                }
+                else{
+                    document.querySelector('.your_copilot').innerHTML += `
+                    <p>You can't add more passengers because of your starship capacity</p>
+                    `
+                }
             })
         })
     })
 }
-function getRMCharacters(){
+function getRMCharacters(countPass){
     document.querySelector('.all_char').innerHTML=``
     
     fetch('https://rickandmortyapi.com/api/character')
     .then(response => response.json())
     .then(response => {
-        document.querySelector('.all_char').innerHTML += `<section class="characters_rm_div"></section>`
-        let charactersDiv = document.querySelector('.characters_rm_div')
-        console.log(charactersDiv)
+        document.querySelector('.all_char').innerHTML += `<section class="characters_div"></section>`
+        let charactersDiv = document.querySelector('.characters_div')
 
         response.results.forEach(characters => {
             charactersDiv.innerHTML += `
-            <div class="people" data-name="${characters.name}" data-image="${characters.image}">
+            <div class="people" data-name="${characters.name}" data-species="${characters.species}" data-image="${characters.image}">
                 <img src="${characters.image}"></img>
-                <p>${characters.name}, ${characters.species}</p>
+                <p>${characters.name} <br> ${characters.species}</p>
             </div>
             `
         })
+        if((typeof document.querySelector('.h2_your_co'))!= 'undefined'){
+            document.querySelector('.your_copilot').innerHTML += `
+                <h2 class="h2_your_co">Co-Pilot/Passengers from Rick & Morty: </h2>
+                `
+        }
+        else{
+            document.querySelector('.your_copilot').innerHTML += ``
+        }
         document.querySelectorAll('.people').forEach(characters => {
             characters.addEventListener('click', event => {
-                console.log(characters)
                 document.querySelector('.your_copilot').innerHTML += `
-                <p>${characters.dataset.name}</p>
                 <img src="${characters.dataset.image}"></img>
+                <p>${characters.dataset.name} <br> ${characters.dataset.species}</p>
                 `
             })
         })
@@ -164,30 +220,36 @@ function getRMCharacters(){
     })
 }
 
-function getHPCharacters(){
+function getHPCharacters(countPass){
     document.querySelector('.all_char').innerHTML=``
     
     fetch('https://hp-api.herokuapp.com/api/characters')
     .then(response => response.json())
     .then(response => {
-        document.querySelector('.all_char').innerHTML += `<section class="characters_hp_div"></section>`
-        let charactersDiv = document.querySelector('.characters_hp_div')
-        console.log(charactersDiv)
+        document.querySelector('.all_char').innerHTML += `<section class="characters_div"></section>`
+        let charactersDiv = document.querySelector('.characters_div')
 
         response.forEach(characters => {
             charactersDiv.innerHTML += `
-            <div class="people" data-name="${characters.name}" data-image="${characters.image}">
+            <div class="people" data-name="${characters.name}" data-house="${characters.house}" data-image="${characters.image}">
                 <img src="${characters.image}"></img>
-                <p>${characters.name}, ${characters.species}</p>
+                <p>${characters.name} <br> ${characters.house}</p>
             </div>
             `
         })
+        if((typeof document.querySelector('.h2_your_co'))!= 'undefined'){
+            document.querySelector('.your_copilot').innerHTML += `
+                <h2 class="h2_your_co">Co-Pilot/Passengers from Harry Potter : </h2>
+                `
+        }
+        else{
+            document.querySelector('.your_copilot').innerHTML += ``
+        }
         document.querySelectorAll('.people').forEach(characters => {
             characters.addEventListener('click', event => {
-                console.log(characters)
                 document.querySelector('.your_copilot').innerHTML += `
-                <p>${characters.dataset.name}</p>
                 <img src="${characters.dataset.image}"></img>
+                <p>${characters.dataset.name} <br>${characters.dataset.house}</p>
                 `
             })
         })
@@ -199,3 +261,10 @@ function getHPCharacters(){
 //https://hp-api.herokuapp.com/api/characters
 // https://api.disneyapi.dev/characters
 //https://rickandmortyapi.com/api/location
+
+
+
+function disappear(){
+    document.querySelector('.click').classList.add('anim_disappear')
+    document.querySelector('.scroll').classList.add('anim_disappear')
+}

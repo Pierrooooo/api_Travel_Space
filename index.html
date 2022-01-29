@@ -11,19 +11,33 @@
     <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@500;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    
-    <h1>Welcome to the Space Travel Selector</h1>
-    
-    <div class="go">
-        <button onclick="getPlanets()"><a href="#planets_div">let's goooooooo</a></button>
-    </div>
-
-    <section class="you_section">
-        <div class="your_destination"></div>
-        <div class="your_starship"></div>
-        <div class="your_copilot"></div>
+    <section class=stars_section>
+        <div class='stars'></div>
+        <div class='stars2'></div>
+        <div class='stars3'></div>
     </section>
     
+    <p class="hi_welcome">Hi & Welcome <br>To My</p>
+
+    <nav>
+        <h1>Space Travel Selector</h1>
+    </nav>
+    
+    <div class="go">
+        <button class="try_it_button" onclick="getPlanets(), disappear()">let's Try It</button>
+    </div>
+    <p class="scroll">scroll</p>
+    <p class="click">click</p>
+
+    <section class="your_section">
+        <div class="your_relative">
+            <div class="your_destination"></div>
+            <div class="your_starship"></div>
+            <div class="your_copilot"></div>
+        </div>
+    </section>
+    
+    <section class="container"></section>
 
     <script src="app.js"></script>
 </body>
