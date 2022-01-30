@@ -4,29 +4,6 @@ var yourDes = document.querySelector('.your_destination')
 var yourShip = document.querySelector('.your_starship')
 var yourCoP = document.querySelector('.your_copilot')
 
-function restart(){
-    document.querySelector('.container').innerHTML=``
-    document.querySelector('.your_section').innerHTML=``
-    document.querySelector('.your_section').innerHTML=`
-    <div class="your_relative"></div>`
-
-    document.querySelector('.your_section').classList.toggle('your_section2')
-    document.querySelector('.arrow').remove()
-    document.querySelector('.your_section').parentElement.innerHTML+=`
-    <img class="arrow" src="imgs/arrow.png" alt="arrow's icon">
-    `
-    document.querySelector('.arrow').addEventListener('click',  event =>{
-        document.querySelector('.arrow').classList.toggle('arrow2')
-        document.querySelector('.your_section').classList.toggle('your_section2')
-    })
-    getPlanets()
-
-}
-
-document.querySelector('.arrow').addEventListener('click',  event =>{
-    document.querySelector('.arrow').classList.toggle('arrow2')
-    document.querySelector('.your_section').classList.toggle('your_section2')
-})
 
 
 function getPlanets(){
@@ -320,3 +297,28 @@ function disappear(){
     document.querySelector('.try_it_button').classList.add('anim_dn')
     
 }
+
+
+function restart(){
+    document.querySelector('.container').innerHTML=``
+    document.querySelector('.your_section').innerHTML=``
+    document.querySelector('.your_section').innerHTML=`
+    <div class="your_relative"></div>`
+
+    document.querySelector('.your_section').classList.toggle('your_section2')
+    document.querySelector('.arrow').remove()
+    document.querySelector('.your_section').parentElement.innerHTML+=`
+    <img class="arrow" src="imgs/arrow.png" alt="arrow's icon">
+    `
+    document.querySelector('.arrow').addEventListener('click',  event =>{
+        document.querySelector('.arrow').classList.toggle('arrow2')
+        document.querySelector('.your_section').classList.toggle('your_section2')
+    })
+    getPlanets()
+
+}
+
+document.querySelector('.arrow').addEventListener('click',  event =>{
+    document.querySelector('.arrow').classList.toggle('arrow2')
+    document.querySelector('.your_section').classList.toggle('your_section2')
+})
