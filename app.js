@@ -4,18 +4,41 @@ var yourDes = document.querySelector('.your_destination')
 var yourShip = document.querySelector('.your_starship')
 var yourCoP = document.querySelector('.your_copilot')
 
+function restart(){
+    document.querySelector('.container').innerHTML=``
+    document.querySelector('.your_section').innerHTML=``
+    document.querySelector('.your_section').innerHTML=`
+    <div class="your_relative"></div>`
+
+    document.querySelector('.your_section').classList.toggle('your_section2')
+    document.querySelector('.arrow').remove()
+    document.querySelector('.your_section').parentElement.innerHTML+=`
+    <img class="arrow" src="imgs/arrow.png" alt="arrow's icon">
+    `
+    document.querySelector('.arrow').addEventListener('click',  event =>{
+        document.querySelector('.arrow').classList.toggle('arrow2')
+        document.querySelector('.your_section').classList.toggle('your_section2')
+    })
+    getPlanets()
+
+}
+
+document.querySelector('.arrow').addEventListener('click',  event =>{
+    document.querySelector('.arrow').classList.toggle('arrow2')
+    document.querySelector('.your_section').classList.toggle('your_section2')
+})
 
 
 function getPlanets(){
-    
+
+    document.querySelector('.container').innerHTML += `<h2 class="h2_choose choose_destination">Choose Your Destination</h2>`
+    document.querySelector('.container').innerHTML += `<section id="planets_div" class="planets_div"></section>`
+    let planetsDiv = document.querySelector('.planets_div')
+    planetsDiv.innerHTML += ``
+
     fetch('https://swapi.dev/api/planets')
     .then(response => response.json())
     .then(response => {
-
-        document.querySelector('.container').innerHTML += `<h2 class="h2_choose choose_destination">Choose Your Destination</h2>`
-        document.querySelector('.container').innerHTML += `<section id="planets_div" class="planets_div"></section>`
-        let planetsDiv = document.querySelector('.planets_div')
-        planetsDiv.innerHTML += ``
 
         response.results.forEach(planet => {
             planetsDiv.innerHTML += `
@@ -28,14 +51,14 @@ function getPlanets(){
             `
         })
 
+        document.querySelector('.your_relative').innerHTML+=`
+        <div class="your_destination"></div>
+        <div class="your_starship"></div>
+        <div class="your_copilot"></div>
+        `
+
         document.querySelectorAll('.planet').forEach(planet => {
             planet.addEventListener('click', event => {
-                document.querySelector('.your_relative').innerHTML+=`
-                <div class="your_destination"></div>
-                <div class="your_starship"></div>
-                <div class="your_copilot"></div>
-                `
-
                 document.querySelector('.your_destination').innerHTML += `
                 <button onclick="restart()" class="restart_button">RESTART</button>
                 <h2 class="h2_your">Destination :</h2>
@@ -50,19 +73,17 @@ function getPlanets(){
                 getStarShips()
             })
         })
-        
     })
 }
 
 function getStarShips(){
+    document.querySelector('.container').innerHTML += `<h2 class="h2_choose choose_starships">Choose Your Starship</h2>`
+    document.querySelector('.container').innerHTML += `<section id="starships_div" class="starships_div"></section>`
+    let starShipsDiv = document.querySelector('.starships_div')
 
     fetch('https://swapi.dev/api/starships')
     .then(response => response.json())
     .then(response => {
-
-        document.querySelector('.container').innerHTML += `<h2 class="h2_choose choose_starships">Choose Your Starship</h2>`
-        document.querySelector('.container').innerHTML += `<section id="starships_div" class="starships_div"></section>`
-        let starShipsDiv = document.querySelector('.starships_div')
 
         response.results.forEach(ship => {
             starShipsDiv.innerHTML += `
@@ -105,12 +126,12 @@ function getStarShips(){
 function getStarWarsCharacters(countPass){
     document.querySelector('.all_char').innerHTML=``
     passMax = document.querySelector('.choose_universe').dataset.passmax
+    document.querySelector('.all_char').innerHTML += `<section id="characters_div" class="characters_div"></section>`
+    let peoplesDiv = document.querySelector('.characters_div')
 
     fetch('https://swapi.dev/api/people')
     .then(response => response.json())
     .then(response => {
-        document.querySelector('.all_char').innerHTML += `<section id="characters_div" class="characters_div"></section>`
-        let peoplesDiv = document.querySelector('.characters_div')
 
         response.results.forEach(people => {
             peoplesDiv.innerHTML += `
@@ -148,12 +169,14 @@ function getStarWarsCharacters(countPass){
 function getGOTCharacters(countPass){
     document.querySelector('.all_char').innerHTML=``
     passMax = document.querySelector('.choose_universe').dataset.passmax
+
+    document.querySelector('.all_char').innerHTML=``
+    document.querySelector('.all_char').innerHTML += `<section class="characters_div"></section>`
+    let charactersDiv = document.querySelector('.characters_div')
     
     fetch('https://thronesapi.com/api/v2/Characters')
     .then(response => response.json())
     .then(response => {
-        document.querySelector('.all_char').innerHTML += `<section class="characters_div"></section>`
-        let charactersDiv = document.querySelector('.characters_div')
 
         response.forEach(characters => {
             charactersDiv.innerHTML += `
@@ -195,12 +218,12 @@ function getRMCharacters(countPass){
     passMax = document.querySelector('.choose_universe').dataset.passmax
     
     document.querySelector('.all_char').innerHTML=``
+    document.querySelector('.all_char').innerHTML += `<section class="characters_div"></section>`
+    let charactersDiv = document.querySelector('.characters_div')
     
     fetch('https://rickandmortyapi.com/api/character')
     .then(response => response.json())
     .then(response => {
-        document.querySelector('.all_char').innerHTML += `<section class="characters_div"></section>`
-        let charactersDiv = document.querySelector('.characters_div')
 
         response.results.forEach(characters => {
             charactersDiv.innerHTML += `
@@ -244,12 +267,12 @@ function getHPCharacters(countPass){
     passMax = document.querySelector('.choose_universe').dataset.passmax
 
     document.querySelector('.all_char').innerHTML=``
+    document.querySelector('.all_char').innerHTML += `<section class="characters_div"></section>`
+    let charactersDiv = document.querySelector('.characters_div')
     
     fetch('https://hp-api.herokuapp.com/api/characters')
     .then(response => response.json())
     .then(response => {
-        document.querySelector('.all_char').innerHTML += `<section class="characters_div"></section>`
-        let charactersDiv = document.querySelector('.characters_div')
 
         response.forEach(characters => {
             charactersDiv.innerHTML += `
@@ -297,28 +320,3 @@ function disappear(){
     document.querySelector('.try_it_button').classList.add('anim_dn')
     
 }
-
-
-function restart(){
-    document.querySelector('.container').innerHTML=``
-    document.querySelector('.your_section').innerHTML=``
-    document.querySelector('.your_section').innerHTML=`
-    <div class="your_relative"></div>`
-
-    document.querySelector('.your_section').classList.toggle('your_section2')
-    document.querySelector('.arrow').remove()
-    document.querySelector('.your_section').parentElement.innerHTML+=`
-    <img class="arrow" src="imgs/arrow.png" alt="arrow's icon">
-    `
-    document.querySelector('.arrow').addEventListener('click',  event =>{
-        document.querySelector('.arrow').classList.toggle('arrow2')
-        document.querySelector('.your_section').classList.toggle('your_section2')
-    })
-    getPlanets()
-
-}
-
-document.querySelector('.arrow').addEventListener('click',  event =>{
-    document.querySelector('.arrow').classList.toggle('arrow2')
-    document.querySelector('.your_section').classList.toggle('your_section2')
-})
