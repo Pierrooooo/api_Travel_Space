@@ -133,6 +133,7 @@ section{
     top: 50%;
     right: 0;
     transform: translate(-50%, -50%) rotateY(180deg);
+    -webkit-transform: translate(-50%, -50%) rotateY(180deg);
     width: 50px;
     z-index: 1000;
     transition: 400ms;
@@ -140,6 +141,7 @@ section{
 .arrow2{
     right: 27%;
     transform: translate(-50%, -50%) rotateY(0);
+    -webkit-transform: translate(-50%, -50%) rotateY(0);
 }
 .dn{
     display: none;
@@ -209,10 +211,16 @@ section{
     padding: 30px 15px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     border-radius: 4px;
     border: 1px solid #ff6;
 }
+.planet,
+.ship{
+    width: 300px;
+}
+
 .planet:hover,
 .ship:hover,
 .people:hover,
@@ -221,7 +229,9 @@ section{
     box-shadow: 2px 2px 8px 8px rgba(255,255,102, 0.4);
     animation: hover_up 300ms forwards linear;
 }
-
+.choose_universe button{
+    z-index: 1000;
+}
 
 .choose_universe button:hover{
     cursor: pointer;
@@ -231,7 +241,9 @@ section{
     width: 200px;
     text-align: center;
 }
-
+.people img{
+    width: 100%;
+}
 
 footer{
     display: flex;
@@ -295,9 +307,11 @@ footer p{
 @keyframes hover_up{
     from{
         transform: translateY(0);
+        -webkit-transform: translateY(0);
     }
     to{
         transform: translateY(-4px);
+        -webkit-transform: translateY(-4px);
     }
 }
 @keyframes disappear{
@@ -410,7 +424,7 @@ footer p{
         left: 10%;
     }
     .your_section{
-        width: 60%;
+        width: 80%;
     }
     .your_section2{
         transform: translateX(-70%);

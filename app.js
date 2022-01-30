@@ -316,5 +316,7 @@ function disappear(){
     document.querySelector('.click').classList.add('anim_dn')
     document.querySelector('.scroll').classList.add('anim_disappear')
     document.querySelector('.scroll').classList.add('anim_dn')
-
+    document.querySelector('.try_it_button').classList.add('anim_disappear')
+    document.querySelector('.try_it_button').classList.add('anim_dn')
+    
 }
