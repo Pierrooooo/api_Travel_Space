@@ -140,8 +140,8 @@ section{
 }
 .arrow2{
     right: 27%;
-    transform: translate(-50%, -50%) rotateY(0);
-    -webkit-transform: translate(-50%, -50%) rotateY(0);
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
 }
 .dn{
     display: none;
@@ -427,8 +427,11 @@ footer p{
         width: 80%;
     }
     .your_section2{
-        transform: translateX(-70%);
+        transform: translateX(-25%);
         transition: 200ms;
+    }
+    .arrow2{
+        transform: translate(130%, -50%);
     }
     .your_copilot p{
         text-align: left;
