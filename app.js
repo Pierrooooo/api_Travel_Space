@@ -65,8 +65,10 @@ function getPlanets(){
                 <p>${planet.dataset.name}</p>
                 `
                 
-                document.querySelector('.planets_div').remove()
-                document.querySelector('.choose_destination').remove()
+                document.querySelector('.planets_div').classList.add('anim_disappear')
+                document.querySelector('.planets_div').classList.add('anim_dn')
+                document.querySelector('.choose_destination').classList.add('anim_disappear')
+                document.querySelector('.choose_destination').classList.add('anim_dn')
 
                 getStarShips()
             })
@@ -114,8 +116,10 @@ function getStarShips(){
                 <div class="all_char"></div>
                 `
                 
-                document.querySelector('.starships_div').remove()
-                document.querySelector('.choose_starships').remove()
+                document.querySelector('.starships_div').classList.add('anim_disappear')
+                document.querySelector('.starships_div').classList.add('anim_dn')
+                document.querySelector('.choose_starships').classList.add('anim_disappear')
+                document.querySelector('.choose_starships').classList.add('anim_dn')
             })
         })
     })
@@ -162,10 +166,7 @@ function getStarWarsCharacters(countPass){
                 }
             })
         })
-        
-        
     })
-
 }
 function getGOTCharacters(countPass){
     document.querySelector('.all_char').innerHTML=``
@@ -312,5 +313,8 @@ function getHPCharacters(countPass){
 
 function disappear(){
     document.querySelector('.click').classList.add('anim_disappear')
+    document.querySelector('.click').classList.add('anim_dn')
     document.querySelector('.scroll').classList.add('anim_disappear')
+    document.querySelector('.scroll').classList.add('anim_dn')
+
 }

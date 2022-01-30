@@ -179,11 +179,7 @@ section{
     text-align: right ;
 }
 
-.anim_disappear{
-    animation: disappear 400ms forwards;
-    opacity: 0;
-    display: none;
-}
+
 
 .h2_choose{
     font-size: 2.5rem;
@@ -291,6 +287,10 @@ footer p{
     left: 0;
 }
 
+.anim_disappear{
+    animation: disappear 200ms forwards;
+    opacity: 0;
+}
 
 @keyframes hover_up{
     from{
@@ -308,6 +308,7 @@ footer p{
     to {
         opacity: 0;
         display: none;
+        height: 0;
     }
 }
 
