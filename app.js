@@ -30,12 +30,13 @@ function disappear(){
 }
 
 function validate() {
+    
+    window.scrollTo(top)
     let planet = document.querySelector('.your_destination p')
     let starShip = document.querySelector('.your_starship p')
     let copilots = document.querySelectorAll('.your_copilot p')
-    console.log(copilots)
     copilotsArray = Array.prototype.slice.call(copilots, 0)
-    console.log(copilotsArray)
+
 
     document.querySelector('.hi_welcome').classList.add('anim_disappear')
 
@@ -71,7 +72,7 @@ function validate() {
                 <p class="center">Space Travel<br />
                 Selector</p>
 
-                <p>I wish you will have a wonderfull travel to ${planet.dataset.planetname}, it's a pretty long trip but you will be in ${starShip.dataset.shipname}. I hope you wont feel bored during the travel because <span class="copilots_span"></span> will share this travel with you.</p>
+                <p>I hope you will have a wonderfull travel to ${planet.dataset.planetname}, it's a pretty long trip but you will be in ${starShip.dataset.shipname}. I hope you wont feel bored during the travel because <span class="copilots_span"></span> will share this travel with you.</p>
                 <p>If you enjoyed my project and you wanna support me, feel free to give me some feed backs </p>
                 
             </div>
@@ -79,15 +80,25 @@ function validate() {
         
     </section>
     `
-        copilotsArray.forEach(copilot => {
-            console.log(copilot.dataset.personame)
+    let copilotCount = 0
+    copilotsArray.forEach(copilot => {
+        if (copilotCount === copilotsArray.length - 1) {
+            document.querySelector('.copilots_span ').innerText += `and ${copilot.dataset.personame} `
+        }
+        else if (copilotCount === copilotsArray.length - 2) {
+            document.querySelector('.copilots_span ').innerText += ` ${copilot.dataset.personame} `
+        }
+        else if (copilotCount < copilotsArray.length) {
             document.querySelector('.copilots_span ').innerText += `${copilot.dataset.personame}, `
-        })
-
+        }
+        else {}
+        copilotCount += 1
+    })
+    console.log(document.querySelector('.titlecontent p span'))
 }
 
 document.querySelector('.arrow').addEventListener('click',  event =>{
-    document.querySelector('.arrow').classList.toggle('arrow2')
+    document.querySelector('.arrow').classList.toggle('arrowwwwlw2')
     document.querySelector('.your_section').classList.toggle('your_section2')
 })
 
@@ -177,7 +188,7 @@ function getStarShips(){
                 `
                 const passMax = ship.dataset.pas
 
-                document.querySelector('.container').innerHTML += `<h2 class="h2_choose choose_characters">Choose The Universe of your Co-Pilot/Passengers</h2>`
+                document.querySelector('.container').innerHTML += `<h2 class="h2_choose choose_characters mt_700">Choose The Universe of your Co-Pilot/Passengers</h2>`
                 document.querySelector('.container').innerHTML +=`
                 <section class="choose_universe" data-passmax="${passMax}">
                     <button onclick="getStarWarsCharacters(countPass)">Star Wars</button>
@@ -198,6 +209,7 @@ function getStarShips(){
 
 function getStarWarsCharacters(countPass) {
 
+    document.querySelector('.choose_characters').classList.remove('mt_700')
     document.querySelector('.starships_div').style.display = 'none'
 
     document.querySelector('.all_char').innerHTML=``
@@ -244,6 +256,7 @@ function getStarWarsCharacters(countPass) {
 }
 function getGOTCharacters(countPass) {
     
+    document.querySelector('.choose_characters').classList.remove('mt_700')
     document.querySelector('.starships_div').style.display = 'none'
 
     document.querySelector('.all_char').innerHTML=``
@@ -296,6 +309,7 @@ function getGOTCharacters(countPass) {
 }
 function getRMCharacters(countPass){
 
+    document.querySelector('.choose_characters').classList.remove('mt_700')
     document.querySelector('.starships_div').style.display = 'none'
 
     document.querySelector('.all_char').innerHTML=``
@@ -350,6 +364,7 @@ function getRMCharacters(countPass){
 
 function getHPCharacters(countPass){
 
+    document.querySelector('.choose_characters').classList.remove('mt_700')
     document.querySelector('.starships_div').style.display = 'none'
 
     document.querySelector('.all_char').innerHTML=``

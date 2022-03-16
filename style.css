@@ -199,7 +199,7 @@ section{
     text-align: center;
     margin-bottom: 40px;
 }
-.choose_characters{
+.mt_700{
     margin-top: -700px;
 }
 
@@ -289,7 +289,7 @@ section{
 	bottom: 0;
 	left: 50%;
 	margin-left: -9em;
-	font-size: 350%;
+	font-size: 300%;
 	text-align: justify;
 	overflow: hidden;
 	transform-origin: 50% 100%;
