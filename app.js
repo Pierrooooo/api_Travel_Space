@@ -94,7 +94,6 @@ function validate() {
         else {}
         copilotCount += 1
     })
-    console.log(document.querySelector('.titlecontent p span'))
 }
 
 document.querySelector('.arrow').addEventListener('click',  event =>{
