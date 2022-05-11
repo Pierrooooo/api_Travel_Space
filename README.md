@@ -1,7 +1,7 @@
 # Hi, this is a class projet in witch I have to use at minimu 2 API.
  I decided to use multiple API wich are : StarWars, Game Of Thrones, Rick & Morty and Harry Potter
  
- It's uploaded at https://space.travel.8pier.re/
+ It's uploaded at https://space-travelor.8pier.re/
 
 ## How it works : 
 
